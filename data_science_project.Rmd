@@ -21,6 +21,7 @@ library(RANN)
 library(skimr)
 library(ggplot2)
 library(stringr)
+library(imputeTS)
 ```
 
 ```{r}
@@ -180,8 +181,20 @@ merge_data <- subset(merge_data, country %in% all_countries)
 write.csv(merge_data,"data/my_data.csv", row.names=FALSE)
 ```
 
+```{r}
+# Perform k-NN imputation
+imputed_data <- kNN(merge_data)
+
+# Check if there are any remaining missing values in the imputed data
+anyNA(imputed_data) 
+```
+
 ```{r, echo = FALSE}
-my_data_imputed <- read_csv("data/my_data_impute.csv")
+write.csv(imputed_data,"data/my_data_imputed.csv", row.names=FALSE)
+```
+
+```{r, echo = FALSE}
+my_data_imputed <- read_csv("data/my_data_imputed.csv")
 ```
 
 
