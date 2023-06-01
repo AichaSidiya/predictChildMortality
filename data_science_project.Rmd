@@ -25,17 +25,17 @@ library(stringr)
 
 ```{r}
 #loading the data set
-mortality_rate <- read.csv('Mortality rate, under-5 (per 1,000 live births).csv')
-health_expenditure <- read.csv('Current health expenditure per capita (current US$).csv')
-health_expenditure_per <- read.csv('Current health expenditure (% of GDP).csv')
-education_expenditure <- read.csv('Current education expenditure, total (%).csv')
-literacy_rate <- read.csv('literacy_rate.csv')
-domestic_health_expenditure <- read.csv('Domestic private health expenditure (% of current health expenditure).csv')
-economic_inequality <- read.csv('economic-inequality-gini-index.csv')
-water_invest <- read.csv('Investment in water and sanitation (current US$).csv')
-vacinnation <- read.csv('vaccination-coverage-by-income-in.csv')
-water_productivity <- read.csv('Water productivity_per cubic meter of total freshwater withdrawal.csv')
-healthcare_access <- read.csv('healthcare-access-and-quality-index.csv')
+mortality_rate <- read.csv('data/Mortality rate, under-5 (per 1,000 live births).csv')
+health_expenditure <- read.csv('data/Current health expenditure per capita (current US$).csv')
+health_expenditure_per <- read.csv('data/Current health expenditure (% of GDP).csv')
+education_expenditure <- read.csv('data/Current education expenditure, total (%).csv')
+literacy_rate <- read.csv('data/literacy_rate.csv')
+domestic_health_expenditure <- read.csv('data/Domestic private health expenditure (% of current health expenditure).csv')
+economic_inequality <- read.csv('data/economic-inequality-gini-index.csv')
+water_invest <- read.csv('data/Investment in water and sanitation (current US$).csv')
+vacinnation <- read.csv('data/vaccination-coverage-by-income-in.csv')
+water_productivity <- read.csv('data/Water productivity_per cubic meter of total freshwater withdrawal.csv')
+healthcare_access <- read.csv('data/healthcare-access-and-quality-index.csv')
 ```
 
 ```{r}
@@ -177,11 +177,11 @@ merge_data <- subset(merge_data, country %in% all_countries)
 ```
 
 ```{r, echo = FALSE}
-write.csv(merge_data,"my_data.csv", row.names=FALSE)
+write.csv(merge_data,"data/my_data.csv", row.names=FALSE)
 ```
 
 ```{r, echo = FALSE}
-my_data_imputed <- read_csv("my_data_impute.csv")
+my_data_imputed <- read_csv("data/my_data_impute.csv")
 ```
 
 
