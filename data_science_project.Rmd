@@ -21,7 +21,8 @@ library(RANN)
 library(skimr)
 library(ggplot2)
 library(stringr)
-library(imputeTS)
+install.packages("VIM")
+library(VIM)
 ```
 
 ```{r}
@@ -182,15 +183,16 @@ write.csv(merge_data,"data/my_data.csv", row.names=FALSE)
 ```
 
 ```{r}
-# Perform k-NN imputation
-imputed_data <- kNN(merge_data)
+# Perform KNN imputation
+imputed_data <- kNN(merge_data) 
+```
 
-# Check if there are any remaining missing values in the imputed data
-anyNA(imputed_data) 
+```{r}
+my_data_imputed <- select(imputed_data, 1:12)
 ```
 
 ```{r, echo = FALSE}
-write.csv(imputed_data,"data/my_data_imputed.csv", row.names=FALSE)
+write.csv(my_data_imputed,"data/my_data_imputed.csv", row.names=FALSE)
 ```
 
 ```{r, echo = FALSE}
