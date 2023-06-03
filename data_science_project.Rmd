@@ -3,9 +3,9 @@ title: "Predicting Childhood Mortality Based on Health and Socio-Economic Indica
 author: "Aicha Sidiya, Hanin Alzaher, Razan Almahdi"
 date: "2023-06-01"
 output:
-  word_document: default
-  html_document: default
   pdf_document: default
+  html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -212,3 +212,90 @@ anyNA(my_data_imputed)
 #saving the imputed data
 write.csv(my_data_imputed, "data/my_data_imputed.csv")
 ```
+
+
+
+
+What is the trend and pattern of the average mortality rate over the years and are there any significant changes or fluctuations observed?
+```{r}
+avg_mortality <- aggregate(mortality_rate ~ year, data = my_data_imputed, FUN = mean)
+
+# Create the line plot
+ggplot(avg_mortality, aes(x = year, y = mortality_rate)) +
+  geom_line() +
+  xlab("Year") +
+  ylab("Average Mortality Rate") +
+  ggtitle("Average Mortality Rate over Years")
+```
+The plot depicts the average mortality rate over a range of years. The x-axis represents the years, while the y-axis represents the average mortality rate. The plot reveals a trend of the average mortality rate over time. In the earlier years, the average mortality rate was relatively high, gradually declining in subsequent years. However, there was a slight increase in the average mortality rate in 2018. Also, the plot shows a significant and noticeable increase in the average mortality rate in 2020. The sudden surge in the average mortality rate suggests a critical event or influential factor that impacted the population's health during this period.
+
+
+What is the relationship between Mortality Rate and Health Expenditure?
+```{r}
+ggplot(data=my_data_imputed,mapping= aes(x = health_expenditure, y = mortality_rate)) +
+  geom_point(color="#361576") +
+  xlab("Health Expenditure") +
+  ylab("Mortality Rate") +
+  ggtitle("Mortality Rate vs. Health Expenditure")
+```
+The plot showcases the relationship between Mortality Rate and Health Expenditure. The x-axis represents Health Expenditure, while the y-axis represents Mortality Rate. The plot demonstrates the varying levels of Mortality Rate observed at different levels of Health Expenditure. 
+
+Upon closer examination, it becomes apparent that there is an inverse relationship between Mortality Rate and Health Expenditure. As Health Expenditure increases, Mortality Rate tends to decrease, suggesting a potential link between higher healthcare investment and improved health outcomes. However, it is worth noting that this relationship may not be entirely linear, as there are instances where the Mortality Rate remains relatively high despite higher Health Expenditure.
+
+
+How does Literacy Rate affects Mortality Rate?
+```{r}
+ggplot(data = my_data_imputed, mapping=aes(x = literacy_rate, y = mortality_rate)) +
+  geom_point(color="#361576") +
+  xlab("Literacy Rate") +
+  ylab("Mortality Rate") +
+  ggtitle("Distribution of Mortality Rate across Literacy Rates")
+```
+The plot illustrates the distribution of Mortality Rate across different levels of Literacy Rates. The x-axis represents the Literacy Rates, while the y-axis represents the Mortality Rate.
+
+Examining the plot, it is evident that there is a discernible pattern in the distribution of Mortality Rate with respect to Literacy Rates. As Literacy Rates increase, there is a tendency for the Mortality Rate to decrease. This suggests a potential correlation between higher literacy levels and lower Mortality Rates, indicating that education and literacy may play a role in improving overall health outcomes.
+
+However, it is important to note that the relationship between Mortality Rate and Literacy Rate may not be solely determined by literacy itself. Other confounding factors such as healthcare access, socioeconomic status, and healthcare utilization may also contribute to the observed distribution.
+
+
+What is the effect of Education Expenditure on Mortality Rate?
+```{r}
+ggplot(data=my_data_imputed,mapping= aes(x = education_expenditure, y = mortality_rate)) +
+  geom_smooth() +
+  xlab("Education Expenditure") +
+  ylab("Mortality Rate") +
+  ggtitle("Effect of Education Expenditure on Mortality Rate")
+```
+The plot visually represents the relationship between Education Expenditure and Mortality Rate. The x-axis represents Education Expenditure, while the y-axis represents Mortality Rate.
+
+Upon examination of the plot, it is evident that there is an observable pattern indicating the effect of Education Expenditure on Mortality Rate. As Education Expenditure increases, there is a corresponding decrease in Mortality Rate. This suggests a potentially significant and meaningful relationship between higher investments in education and improved health outcomes.
+
+The plot demonstrates that allocating resources towards education expenditure may play a crucial role in reducing Mortality Rate. However, it is important to note that this relationship may not be solely determined by education expenditure itself. As we observe the significant increase of the mortality rate, other factors such as healthcare infrastructure, socioeconomic conditions, and healthcare accessibility might also influence the observed relationship.
+
+
+
+What is the relationship between Water Productivity and Mortality Rate?
+```{r}
+ggplot(data=my_data_imputed,mapping =  aes(x = water_productivity, y = mortality_rate)) +
+  geom_point(color = "#361576") +
+  xlab(" Water Productivity") +
+  ylab("Mortality Rate") +
+  ggtitle("Relationship between Water Productivity and Mortality Rate") 
+```
+The plot visually represents the relationship between Water Productivity and Mortality Rate. The x-axis represents Water Productivity, while the y-axis represents Mortality Rate.
+
+Upon examining the plot, it becomes apparent that there is a discernible pattern suggesting a relationship between Water Productivity and Mortality Rate. As Water Productivity increases, there is a tendency for the Mortality Rate to decrease. This implies that higher efficiency and productivity in water usage may be associated with improved health outcomes and reduced Mortality Rates.
+
+
+
+What is the relationship between Immunazation and Mortality Rate?
+```{r}
+ggplot(data= my_data_imputed, mapping = aes(x = immunazation,y = mortality_rate))+
+  geom_bar(stat = "summary", fun = "mean",color="#361576")+
+  xlab("Immunazation") +
+  ylab("Mortality Rate") +
+  ggtitle("Relationship between Immunazation and Mortality Rate")
+```
+The plot visually represents the relationship between Immunization and Mortality Rate. The x-axis represents the level of Immunization, while the y-axis represents the Mortality Rate.
+
+Upon examining the plot, a clear pattern emerges, indicating a relationship between Immunization and Mortality Rate. As the level of Immunization increases, there is a corresponding decrease in the Mortality Rate. This suggests that higher rates of Immunization may be associated with lower Mortality Rates, highlighting the potential protective effect of immunization against preventable diseases.
