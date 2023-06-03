@@ -1,0 +1,578 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Predicting Childhood Mortality Based on Health and Socio-Economic Indicators},
+  pdfauthor={Aicha Sidiya, Hanin Alzaher, Razan Almahdi},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Predicting Childhood Mortality Based on Health and Socio-Economic
+Indicators}
+\author{Aicha Sidiya, Hanin Alzaher, Razan Almahdi}
+\date{2023-06-01}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#loading libraries}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v ggplot2 3.4.1     v purrr   1.0.1
+## v tibble  3.2.1     v dplyr   1.1.0
+## v tidyr   1.3.0     v stringr 1.5.0
+## v readr   2.1.3     v forcats 1.0.0
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'caret' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+## 
+## Attaching package: 'caret'
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(RANN)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'RANN' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skimr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'skimr' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(gbm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'gbm' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded gbm 2.1.8.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#loading the data set}
+\NormalTok{mortality\_rate }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Mortality rate, under{-}5 (per 1,000 live births).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Current health expenditure per capita (current US$).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{health\_expenditure\_per }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Current health expenditure (\% of GDP).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{education\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Current education expenditure, total (\%).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{literacy\_rate }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/literacy\_rate.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{domestic\_health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Domestic private health expenditure (\% of current health expenditure).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{economic\_inequality }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/economic{-}inequality{-}gini{-}index.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{water\_invest }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Investment in water and sanitation (current US$).csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{vacinnation }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/vaccination{-}coverage{-}by{-}income{-}in.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{water\_productivity }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/Water productivity\_per cubic meter of total freshwater withdrawal.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{healthcare\_access }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}data/healthcare{-}access{-}and{-}quality{-}index.csv\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#selecting from year 2000 till 2020}
+\NormalTok{mortality\_rate }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(mortality\_rate, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(health\_expenditure, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{health\_expenditure\_per}\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(health\_expenditure\_per, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{literacy\_rate }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(literacy\_rate, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{education\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(education\_expenditure, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{water\_invest }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(water\_invest, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{water\_productivity }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(water\_productivity, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{domestic\_health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(domestic\_health\_expenditure, country, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\NormalTok{economic\_inequality }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(economic\_inequality, year }\SpecialCharTok{\textgreater{}=} \DecValTok{2000}\NormalTok{)}
+\NormalTok{vacinnation }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(vacinnation, year }\SpecialCharTok{\textgreater{}=} \DecValTok{2000}\NormalTok{)}
+\NormalTok{healthcare\_access }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(healthcare\_access, year }\SpecialCharTok{\textgreater{}=} \DecValTok{2000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#renaming columns}
+\NormalTok{mortality\_rate\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (mortality\_rate, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(mortality\_rate\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(mortality\_rate\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{mortality\_rate }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(mortality\_rate, country)}
+\NormalTok{mortality\_rate }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(mortality\_rate,mortality\_rate\_years)}
+
+\NormalTok{health\_expenditure\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (health\_expenditure, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(health\_expenditure\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(health\_expenditure\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(health\_expenditure, country)}
+\NormalTok{health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(health\_expenditure, health\_expenditure\_years)}
+
+\NormalTok{health\_expenditure\_per\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (health\_expenditure\_per, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(health\_expenditure\_per\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(health\_expenditure\_per\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{health\_expenditure\_per }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(health\_expenditure\_per, country)}
+\NormalTok{health\_expenditure\_per }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(health\_expenditure\_per, health\_expenditure\_per\_years)}
+
+\NormalTok{education\_expenditure\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (education\_expenditure, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(education\_expenditure\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(education\_expenditure\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{education\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(education\_expenditure, country)}
+\NormalTok{education\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(education\_expenditure, education\_expenditure\_years)}
+
+\NormalTok{domestic\_health\_expenditure\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (domestic\_health\_expenditure, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(domestic\_health\_expenditure\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(domestic\_health\_expenditure\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{domestic\_health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(domestic\_health\_expenditure, country)}
+\NormalTok{domestic\_health\_expenditure }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(domestic\_health\_expenditure, domestic\_health\_expenditure\_years)}
+
+\NormalTok{literacy\_rate\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (literacy\_rate, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(literacy\_rate\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(literacy\_rate\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{literacy\_rate }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(literacy\_rate, country)}
+\NormalTok{literacy\_rate }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(literacy\_rate, literacy\_rate\_years)}
+
+\NormalTok{water\_invest\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (water\_invest, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(water\_invest\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(water\_invest\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{water\_invest }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(water\_invest, country)}
+\NormalTok{water\_invest }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(water\_invest, water\_invest\_years)}
+
+\NormalTok{water\_productivity\_years }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{ (water\_productivity, }\StringTok{\textquotesingle{}X2000\textquotesingle{}}\SpecialCharTok{:}\StringTok{\textquotesingle{}X2020\textquotesingle{}}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(water\_productivity\_years) }\OtherTok{\textless{}{-}} \FunctionTok{str\_sub}\NormalTok{(}\FunctionTok{names}\NormalTok{(water\_productivity\_years),}\DecValTok{2}\NormalTok{)}
+\NormalTok{water\_productivity }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(water\_productivity, country)}
+\NormalTok{water\_productivity }\OtherTok{\textless{}{-}} \FunctionTok{bind\_cols}\NormalTok{(water\_productivity, water\_productivity\_years)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#pivoting tables}
+\NormalTok{mortality\_rate1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(mortality\_rate, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"mortality\_rate"}\NormalTok{)}
+\NormalTok{health\_expenditure1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(health\_expenditure, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"health\_expenditure"}\NormalTok{)}
+\NormalTok{health\_expenditure\_per1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(health\_expenditure\_per, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"health\_expenditure\_per"}\NormalTok{)}
+\NormalTok{education\_expenditure1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(education\_expenditure, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"education\_expenditure"}\NormalTok{)}
+\NormalTok{domestic\_health\_expenditure1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(domestic\_health\_expenditure, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"domestic\_health\_expenditure"}\NormalTok{)}
+\NormalTok{literacy\_rate1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(literacy\_rate, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"literacy\_rate"}\NormalTok{)}
+\NormalTok{water\_invest1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(water\_invest, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"water\_invest"}\NormalTok{)}
+\NormalTok{water\_productivity1 }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(water\_productivity, }\AttributeTok{cols=}\StringTok{"2000"}\SpecialCharTok{:}\StringTok{"2020"}\NormalTok{,}
+                                 \AttributeTok{names\_to =} \StringTok{"year"}\NormalTok{,}
+                                 \AttributeTok{values\_to =} \StringTok{"water\_productivity"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#merging data}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(mortality\_rate1, health\_expenditure1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, health\_expenditure\_per1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, education\_expenditure1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, domestic\_health\_expenditure1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, literacy\_rate1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, water\_invest1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, water\_productivity1, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(merge\_data, vacinnation, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"country"}\NormalTok{, }\StringTok{"year"}\NormalTok{), }\AttributeTok{all =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{(merge\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 7,403
+## Columns: 12
+## $ country                     <chr> "Abkhazia", "Afghanistan", "Afghanistan", ~
+## $ year                        <chr> "2015", "2000", "2001", "2002", "2003", "2~
+## $ mortality_rate              <dbl> NA, 129.3, 125.3, 121.2, 117.0, 112.8, 108~
+## $ health_expenditure          <dbl> NA, NA, NA, 17.00759, 17.81492, 21.42946, ~
+## $ health_expenditure_per      <dbl> NA, NA, NA, 9.443391, 8.941258, 9.808474, ~
+## $ education_expenditure       <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
+## $ domestic_health_expenditure <dbl> NA, NA, NA, 85.37560, 86.06919, 84.52759, ~
+## $ literacy_rate               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
+## $ water_invest                <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
+## $ water_productivity          <dbl> NA, NA, NA, 0.3725069, 0.4054078, 0.411140~
+## $ immunazation                <int> NA, 24, 33, 36, 41, 50, 58, 58, 63, 64, 63~
+## $ GDP_per_capita              <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skimmed }\OtherTok{\textless{}{-}} \FunctionTok{skim\_to\_wide}\NormalTok{(merge\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: 'skim_to_wide' is deprecated.
+## Use 'skim()' instead.
+## See help("Deprecated")
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skimmed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule()
+\endhead
+Name & Piped data \\
+Number of rows & 7403 \\
+Number of columns & 12 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+character & 2 \\
+numeric & 10 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: character}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1944}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1389}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1944}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0556}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0556}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0833}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1528}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+max
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+empty
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_unique
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+whitespace
+\end{minipage} \\
+\midrule()
+\endhead
+country & 0 & 1 & 4 & 52 & 0 & 385 & 0 \\
+year & 0 & 1 & 4 & 4 & 0 & 22 & 0 \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1986}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0709}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0993}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0922}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0922}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0496}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0851}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0851}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0922}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0922}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0426}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule()
+\endhead
+mortality\_rate & 2279 & 0.69 & 40.90 & 4.085000e+01 & 1.80 & 9.80 &
+2.42000e+01 & 6.252000e+01 & 2.285000e+02 & ▇▂▁▁▁ \\
+health\_expenditure & 2477 & 0.67 & 876.37 & 1.567730e+03 & 4.45 & 62.73
+& 2.40640e+02 & 7.461300e+02 & 1.170241e+04 & ▇▁▁▁▁ \\
+health\_expenditure\_per & 2477 & 0.67 & 6.14 & 2.740000e+00 & 1.26 &
+4.24 & 5.40000e+00 & 7.720000e+00 & 2.423000e+01 & ▇▅▁▁▁ \\
+education\_expenditure & 5669 & 0.23 & 90.86 & 7.220000e+00 & 32.81 &
+88.92 & 9.22500e+01 & 9.509000e+01 & 1.000000e+02 & ▁▁▁▁▇ \\
+domestic\_health\_expenditure & 2477 & 0.67 & 42.30 & 1.852000e+01 &
+0.52 & 28.05 & 4.22700e+01 & 5.585000e+01 & 8.794000e+01 & ▃▆▇▆▂ \\
+literacy\_rate & 5742 & 0.22 & 80.21 & 1.719000e+01 & 14.38 & 66.54 &
+8.54000e+01 & 9.450000e+01 & 1.000000e+02 & ▁▁▃▃▇ \\
+water\_invest & 7117 & 0.04 & 953377952.62 & 1.280216e+09 & 0.00 &
+96250000.00 & 3.67710e+08 & 1.338034e+09 & 6.272480e+09 & ▇▂▁▁▁ \\
+water\_productivity & 2827 & 0.62 & 56.87 & 1.424400e+02 & 0.22 & 6.65 &
+1.56500e+01 & 4.772000e+01 & 3.072790e+03 & ▇▁▁▁▁ \\
+immunazation & 2978 & 0.60 & 86.79 & 1.470000e+01 & 19.00 & 82.00 &
+9.30000e+01 & 9.700000e+01 & 9.900000e+01 & ▁▁▁▂▇ \\
+GDP\_per\_capita & 3753 & 0.49 & 19489.65 & 2.203415e+04 & 251.09 &
+4219.56 & 1.15329e+04 & 2.762972e+04 & 3.032066e+05 & ▇▁▁▁▁ \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#including counties of the world}
+\NormalTok{all\_countries }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Afghanistan"}\NormalTok{, }\StringTok{"Albania"}\NormalTok{, }\StringTok{"Algeria"}\NormalTok{, }\StringTok{"Andorra"}\NormalTok{, }\StringTok{"Angola"}\NormalTok{, }\StringTok{"Antigua and Barbuda"}\NormalTok{,}
+    \StringTok{"Argentina"}\NormalTok{, }\StringTok{"Armenia"}\NormalTok{, }\StringTok{"Australia"}\NormalTok{, }\StringTok{"Austria"}\NormalTok{, }\StringTok{"Azerbaijan"}\NormalTok{, }\StringTok{"Bahamas"}\NormalTok{, }\StringTok{"Bahrain"}\NormalTok{,}
+    \StringTok{"Bangladesh"}\NormalTok{, }\StringTok{"Barbados"}\NormalTok{, }\StringTok{"Belarus"}\NormalTok{, }\StringTok{"Belgium"}\NormalTok{, }\StringTok{"Belize"}\NormalTok{, }\StringTok{"Benin"}\NormalTok{, }\StringTok{"Bhutan"}\NormalTok{,}
+    \StringTok{"Bolivia"}\NormalTok{, }\StringTok{"Bosnia and Herzegovina"}\NormalTok{, }\StringTok{"Botswana"}\NormalTok{, }\StringTok{"Brazil"}\NormalTok{, }\StringTok{"Brunei"}\NormalTok{, }\StringTok{"Bulgaria"}\NormalTok{,}
+    \StringTok{"Burkina Faso"}\NormalTok{, }\StringTok{"Burundi"}\NormalTok{, }\StringTok{"Cabo Verde"}\NormalTok{, }\StringTok{"Cambodia"}\NormalTok{, }\StringTok{"Cameroon"}\NormalTok{, }\StringTok{"Canada"}\NormalTok{,}
+    \StringTok{"Central African Republic"}\NormalTok{, }\StringTok{"Chad"}\NormalTok{, }\StringTok{"Chile"}\NormalTok{, }\StringTok{"China"}\NormalTok{, }\StringTok{"Colombia"}\NormalTok{, }\StringTok{"Comoros"}\NormalTok{,}
+    \StringTok{"Congo"}\NormalTok{, }\StringTok{"Costa Rica"}\NormalTok{, }\StringTok{"Croatia"}\NormalTok{, }\StringTok{"Cuba"}\NormalTok{, }\StringTok{"Cyprus"}\NormalTok{, }\StringTok{"Czech Republic"}\NormalTok{, }\StringTok{"Denmark"}\NormalTok{,}
+    \StringTok{"Djibouti"}\NormalTok{, }\StringTok{"Dominica"}\NormalTok{, }\StringTok{"Dominican Republic"}\NormalTok{, }\StringTok{"East Timor"}\NormalTok{, }\StringTok{"Ecuador"}\NormalTok{, }\StringTok{"Egypt"}\NormalTok{,}
+    \StringTok{"El Salvador"}\NormalTok{, }\StringTok{"Equatorial Guinea"}\NormalTok{, }\StringTok{"Eritrea"}\NormalTok{, }\StringTok{"Estonia"}\NormalTok{, }\StringTok{"Eswatini"}\NormalTok{, }\StringTok{"Ethiopia"}\NormalTok{,}
+    \StringTok{"Fiji"}\NormalTok{, }\StringTok{"Finland"}\NormalTok{, }\StringTok{"France"}\NormalTok{, }\StringTok{"Gabon"}\NormalTok{, }\StringTok{"Gambia"}\NormalTok{, }\StringTok{"Georgia"}\NormalTok{, }\StringTok{"Germany"}\NormalTok{, }\StringTok{"Ghana"}\NormalTok{,}
+    \StringTok{"Greece"}\NormalTok{, }\StringTok{"Grenada"}\NormalTok{, }\StringTok{"Guatemala"}\NormalTok{, }\StringTok{"Guinea"}\NormalTok{, }\StringTok{"Guinea{-}Bissau"}\NormalTok{, }\StringTok{"Guyana"}\NormalTok{, }\StringTok{"Haiti"}\NormalTok{,}
+    \StringTok{"Honduras"}\NormalTok{, }\StringTok{"Hungary"}\NormalTok{, }\StringTok{"Iceland"}\NormalTok{, }\StringTok{"India"}\NormalTok{, }\StringTok{"Indonesia"}\NormalTok{, }\StringTok{"Iran"}\NormalTok{, }\StringTok{"Iraq"}\NormalTok{, }\StringTok{"Ireland"}\NormalTok{,}
+    \StringTok{"Israel"}\NormalTok{, }\StringTok{"Italy"}\NormalTok{, }\StringTok{"Jamaica"}\NormalTok{, }\StringTok{"Japan"}\NormalTok{, }\StringTok{"Jordan"}\NormalTok{, }\StringTok{"Kazakhstan"}\NormalTok{, }\StringTok{"Kenya"}\NormalTok{, }\StringTok{"Kiribati"}\NormalTok{,}
+    \StringTok{"Korea, North"}\NormalTok{, }\StringTok{"Korea, South"}\NormalTok{, }\StringTok{"Kosovo"}\NormalTok{, }\StringTok{"Kuwait"}\NormalTok{, }\StringTok{"Kyrgyzstan"}\NormalTok{, }\StringTok{"Laos"}\NormalTok{, }\StringTok{"Latvia"}\NormalTok{,}
+    \StringTok{"Lebanon"}\NormalTok{, }\StringTok{"Lesotho"}\NormalTok{, }\StringTok{"Liberia"}\NormalTok{, }\StringTok{"Libya"}\NormalTok{, }\StringTok{"Liechtenstein"}\NormalTok{, }\StringTok{"Lithuania"}\NormalTok{, }\StringTok{"Luxembourg"}\NormalTok{,}
+    \StringTok{"Madagascar"}\NormalTok{, }\StringTok{"Malawi"}\NormalTok{, }\StringTok{"Malaysia"}\NormalTok{, }\StringTok{"Maldives"}\NormalTok{, }\StringTok{"Mali"}\NormalTok{, }\StringTok{"Malta"}\NormalTok{, }\StringTok{"Marshall Islands"}\NormalTok{,}
+    \StringTok{"Mauritania"}\NormalTok{, }\StringTok{"Mauritius"}\NormalTok{, }\StringTok{"Mexico"}\NormalTok{, }\StringTok{"Micronesia"}\NormalTok{, }\StringTok{"Moldova"}\NormalTok{, }\StringTok{"Monaco"}\NormalTok{, }\StringTok{"Mongolia"}\NormalTok{,}
+    \StringTok{"Montenegro"}\NormalTok{, }\StringTok{"Morocco"}\NormalTok{, }\StringTok{"Mozambique"}\NormalTok{, }\StringTok{"Myanmar"}\NormalTok{, }\StringTok{"Namibia"}\NormalTok{, }\StringTok{"Nauru"}\NormalTok{, }\StringTok{"Nepal"}\NormalTok{,}
+    \StringTok{"Netherlands"}\NormalTok{, }\StringTok{"New Zealand"}\NormalTok{, }\StringTok{"Nicaragua"}\NormalTok{, }\StringTok{"Niger"}\NormalTok{, }\StringTok{"Nigeria"}\NormalTok{, }\StringTok{"North Macedonia"}\NormalTok{,}
+    \StringTok{"Norway"}\NormalTok{, }\StringTok{"Oman"}\NormalTok{, }\StringTok{"Pakistan"}\NormalTok{, }\StringTok{"Palau"}\NormalTok{, }\StringTok{"Panama"}\NormalTok{, }\StringTok{"Papua New Guinea"}\NormalTok{, }\StringTok{"Paraguay"}\NormalTok{,}
+    \StringTok{"Peru"}\NormalTok{, }\StringTok{"Philippines"}\NormalTok{, }\StringTok{"Poland"}\NormalTok{, }\StringTok{"Portugal"}\NormalTok{, }\StringTok{"Qatar"}\NormalTok{, }\StringTok{"Romania"}\NormalTok{, }\StringTok{"Russia"}\NormalTok{, }\StringTok{"Rwanda"}\NormalTok{,}
+    \StringTok{"Saint Kitts and Nevis"}\NormalTok{, }\StringTok{"Saint Lucia"}\NormalTok{, }\StringTok{"Saint Vincent and the Grenadines"}\NormalTok{, }\StringTok{"Samoa"}\NormalTok{,}
+    \StringTok{"San Marino"}\NormalTok{, }\StringTok{"Sao Tome and Principe"}\NormalTok{, }\StringTok{"Saudi Arabia"}\NormalTok{, }\StringTok{"Senegal"}\NormalTok{, }\StringTok{"Serbia"}\NormalTok{, }\StringTok{"Seychelles"}\NormalTok{,}
+    \StringTok{"Sierra Leone"}\NormalTok{, }\StringTok{"Singapore"}\NormalTok{, }\StringTok{"Slovakia"}\NormalTok{, }\StringTok{"Slovenia"}\NormalTok{, }\StringTok{"Solomon Islands"}\NormalTok{, }\StringTok{"Somalia"}\NormalTok{,}
+    \StringTok{"South Africa"}\NormalTok{, }\StringTok{"South Sudan"}\NormalTok{, }\StringTok{"Spain"}\NormalTok{, }\StringTok{"Sri Lanka"}\NormalTok{, }\StringTok{"Sudan"}\NormalTok{, }\StringTok{"Suriname"}\NormalTok{, }\StringTok{"Sweden"}\NormalTok{,}
+    \StringTok{"Switzerland"}\NormalTok{, }\StringTok{"Syria"}\NormalTok{, }\StringTok{"Taiwan"}\NormalTok{, }\StringTok{"Tajikistan"}\NormalTok{, }\StringTok{"Tanzania"}\NormalTok{, }\StringTok{"Thailand"}\NormalTok{, }\StringTok{"Togo"}\NormalTok{,}
+    \StringTok{"Tonga"}\NormalTok{, }\StringTok{"Trinidad and Tobago"}\NormalTok{, }\StringTok{"Tunisia"}\NormalTok{, }\StringTok{"Turkey"}\NormalTok{, }\StringTok{"Turkmenistan"}\NormalTok{, }\StringTok{"Tuvalu"}\NormalTok{,}
+    \StringTok{"Uganda"}\NormalTok{, }\StringTok{"Ukraine"}\NormalTok{, }\StringTok{"United Arab Emirates"}\NormalTok{, }\StringTok{"United Kingdom"}\NormalTok{, }\StringTok{"United States"}\NormalTok{,}
+    \StringTok{"Uruguay"}\NormalTok{, }\StringTok{"Uzbekistan"}\NormalTok{, }\StringTok{"Vanuatu"}\NormalTok{, }\StringTok{"Vatican City"}\NormalTok{, }\StringTok{"Venezuela"}\NormalTok{, }\StringTok{"Vietnam"}\NormalTok{,}
+    \StringTok{"Yemen"}\NormalTok{, }\StringTok{"Zambia"}\NormalTok{, }\StringTok{"Zimbabwe"}\NormalTok{)}
+
+\NormalTok{merge\_data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(merge\_data, country }\SpecialCharTok{\%in\%}\NormalTok{ all\_countries)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#saving the final data}
+\FunctionTok{write.csv}\NormalTok{(merge\_data, }\StringTok{"data/my\_data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#remove rows with all na}
+\NormalTok{filtered\_data }\OtherTok{\textless{}{-}}\NormalTok{ merge\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{country, }\SpecialCharTok{{-}}\NormalTok{year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)) }\SpecialCharTok{!=} \FunctionTok{ncol}\NormalTok{(.))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the knn imputation model on the training data}
+\NormalTok{preProcess\_missingdata\_model }\OtherTok{\textless{}{-}} \FunctionTok{preProcess}\NormalTok{(filtered\_data, }\AttributeTok{method=}\StringTok{\textquotesingle{}knnImpute\textquotesingle{}}\NormalTok{)}
+\NormalTok{preProcess\_missingdata\_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Created from 39 samples and 10 variables
+## 
+## Pre-processing:
+##   - centered (10)
+##   - ignored (0)
+##   - 5 nearest neighbor imputation (10)
+##   - scaled (10)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Use the imputation model to predict the values of missing data points}
+\NormalTok{my\_data\_imputed }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(preProcess\_missingdata\_model, }\AttributeTok{newdata =}\NormalTok{ filtered\_data)}
+\FunctionTok{anyNA}\NormalTok{(my\_data\_imputed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#saving the imputed data}
+\FunctionTok{write.csv}\NormalTok{(my\_data\_imputed, }\StringTok{"data/my\_data\_imputed.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
