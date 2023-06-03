@@ -3,9 +3,9 @@ title: "Predicting Childhood Mortality Based on Health and Socio-Economic Indica
 author: "Aicha Sidiya, Hanin Alzaher, Razan Almahdi"
 date: "2023-06-01"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -213,15 +213,19 @@ anyNA(my_data_imputed)
 write.csv(my_data_imputed, "data/my_data_imputed.csv")
 ```
 
-
-
-
 What is the trend and pattern of the average mortality rate over the years and are there any significant changes or fluctuations observed?
-```{r}
-avg_mortality <- aggregate(mortality_rate ~ year, data = my_data_imputed, FUN = mean)
+```{r avg mortality}
+# Impute missing values in the mortality_rate column using mean
+imputed_data_mean <- merge_data %>%
+  mutate(mortality_rate = replace_na(mortality_rate, mean(mortality_rate, na.rm = TRUE)))
+
+write.csv(imputed_data_mean, "data/imputed_data_mean.csv")
+
+# Aggregate data by year and calculate the average mortality rate
+avg_mortality <- aggregate(mortality_rate ~ year, data = imputed_data_mean, FUN = mean)
 
 # Create the line plot
-ggplot(avg_mortality, aes(x = year, y = mortality_rate)) +
+ggplot(avg_mortality, aes(x = year, y = mortality_rate, group = 1)) +
   geom_line() +
   xlab("Year") +
   ylab("Average Mortality Rate") +
@@ -231,7 +235,7 @@ The plot depicts the average mortality rate over a range of years. The x-axis re
 
 
 What is the relationship between Mortality Rate and Health Expenditure?
-```{r}
+```{r mprtality rate vs health}
 ggplot(data=my_data_imputed,mapping= aes(x = health_expenditure, y = mortality_rate)) +
   geom_point(color="#361576") +
   xlab("Health Expenditure") +
@@ -244,7 +248,7 @@ Upon closer examination, it becomes apparent that there is an inverse relationsh
 
 
 How does Literacy Rate affects Mortality Rate?
-```{r}
+```{r mortality rate vs expenditure}
 ggplot(data = my_data_imputed, mapping=aes(x = literacy_rate, y = mortality_rate)) +
   geom_point(color="#361576") +
   xlab("Literacy Rate") +
@@ -259,7 +263,7 @@ However, it is important to note that the relationship between Mortality Rate an
 
 
 What is the effect of Education Expenditure on Mortality Rate?
-```{r}
+```{r mortality rate vs education}
 ggplot(data=my_data_imputed,mapping= aes(x = education_expenditure, y = mortality_rate)) +
   geom_smooth() +
   xlab("Education Expenditure") +
@@ -299,3 +303,134 @@ ggplot(data= my_data_imputed, mapping = aes(x = immunazation,y = mortality_rate)
 The plot visually represents the relationship between Immunization and Mortality Rate. The x-axis represents the level of Immunization, while the y-axis represents the Mortality Rate.
 
 Upon examining the plot, a clear pattern emerges, indicating a relationship between Immunization and Mortality Rate. As the level of Immunization increases, there is a corresponding decrease in the Mortality Rate. This suggests that higher rates of Immunization may be associated with lower Mortality Rates, highlighting the potential protective effect of immunization against preventable diseases.
+
+```{r trainig1}
+# Store X and Y for later use.
+X = my_data_imputed[, 2:10]
+y = my_data_imputed$mortality_rate
+```
+
+
+```{r split-train-test}
+# Set the seed for reproducibility
+set.seed(123)
+
+#train test split 
+train_indices <- createDataPartition(y, p = 0.8, list = FALSE)
+X_train <- X[train_indices,]
+y_train <- y[train_indices]
+X_test <- X[-train_indices,]
+y_test <- y[-train_indices]
+
+```
+
+```{r linear regression}
+# Create and fit the linear regression model
+model_LR <- train(X_train, y_train, method = "lm")
+
+# Make predictions on the test set
+y_pred_LR <- predict(model_LR, X_test)
+
+# Evaluate the model using mean squared error
+mse_LR <- mean((y_test - y_pred_LR)^2)
+
+# Calculate R-squared
+r2_LR <- cor(y_pred_LR, y_test)^2
+
+```
+
+```{r decison tree}
+# Create and fit the decison tree model
+model_tree <- train(X_train, y_train, method = "rpart")
+
+# Make predictions on the test set
+y_pred_tree <- predict(model_tree, X_test)
+
+# Evaluate the model using mean squared error
+mse_tree <- mean((y_test - y_pred_tree)^2)
+
+# Calculate R-squared
+r2_tree <- cor(y_pred_tree, y_test)^2
+```
+
+```{r gradiant boost}
+# Create and fit the gradiant boost model
+model_gbm <- train(X_train, y_train, method = "gbm")
+
+# Make predictions on the test set
+y_pred_gbm <- predict(model_gbm, X_test)
+
+# Evaluate the model using mean squared error
+mse_gbm <- mean((y_test - y_pred_gbm)^2)
+
+# Calculate R-squared
+r2_gbm <- cor(y_pred_gbm, y_test)^2
+```
+
+```{r XGBoost}
+# Create and fit the XGBoost model
+model_xgb <- train(X_train, y_train, method = "xgbTree")
+
+# Make predictions on the test set
+y_pred_xgb <- predict(model_xgb, X_test)
+
+# Evaluate the model using mean squared error
+mse_xgb <- mean((y_test - y_pred_xgb)^2)
+
+# Calculate R-squared
+r2_xgb <- cor(y_pred_xgb, y_test)^2
+```
+
+```{r SVM}
+# Create and fit the SVM model
+model_svm <- train(X_train, y_train, method = "svmRadial")
+
+# Make predictions on the test set
+y_pred_svm <- predict(model_svm, X_test)
+
+# Evaluate the model using mean squared error
+mse_svm <- mean((y_test - y_pred_svm)^2)
+
+# Calculate R-squared
+r2_svm <- cor(y_pred_xgb, y_test)^2
+```
+
+```{r compare}
+#create table to compare models
+metrics_df <- data.frame(Model = c("Linear Regression", "Decision Tree", "GBM", "XGBoost", "SVM"),
+                         RMSE = c(mse_LR, mse_tree, mse_gbm, mse_xgb, mse_svm),
+                         R_squared = c(r2_LR, r2_tree, r2_gbm, r2_xgb, r2_svm))
+
+# Print the table
+print(metrics_df)
+```
+
+```{r linear regression2}
+#printing feature table for linear regression model
+feature_importance_LR <- varImp(model_LR)
+print(feature_importance_LR)
+```
+
+```{r decision tree2}
+#printing feature table for decision tree model
+feature_importance_tree <- varImp(model_tree)
+print(feature_importance_tree)
+```
+```{r gradient boost2}
+#printing feature table for gradient boost  model
+feature_importance_gbm <- varImp(model_gbm)
+print(feature_importance_gbm)
+```
+
+```{r  XGBoost2}
+#printing feature table for XGBoost  model
+feature_importance_xgb <- varImp(model_xgb)
+print(feature_importance_xgb)
+```
+
+```{r SVM2}
+#printing feature table for SVM  model
+feature_importance_svm <- varImp(model_svm)
+print(feature_importance_svm)
+```
+
