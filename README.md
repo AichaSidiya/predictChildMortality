@@ -36,6 +36,7 @@ git clone https://github.com/AichaSidiya/predictChildMortality.git
 + ggplot2 3.4.1
 + stringr 1.5.0
 + gbm 2.1.8.1
++ reshape2 1.4.4
  
 
 ## Authors
